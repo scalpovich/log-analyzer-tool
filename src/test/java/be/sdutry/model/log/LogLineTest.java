@@ -22,7 +22,7 @@ public class LogLineTest {
         assertThat(logLine.getThread(), is("RenderingQueue"));
         assertThat(logLine.getLogLevel(), is(LogLevel.INFO));
         assertThat(logLine.getRenderingClass(), is("RenderingQueue"));
-        assertThat(logLine.getMessage(), is(" Rendering next image..."));
+        assertThat(logLine.getMessage(), is("Rendering next image..."));
     }
 
     @Test

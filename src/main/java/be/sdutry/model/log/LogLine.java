@@ -10,7 +10,7 @@ import lombok.Getter;
 public class LogLine {
     public static final DateTimeFormatter LOG_TIMESTAMP_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss,SSS");
 
-    private static final Pattern LINE_PATTERN = Pattern.compile("^([0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3})\\s+\\[([^\\]]+)\\]\\s+(\\S+)\\s+\\[([^\\]]+)\\]:(.*)$");
+    private static final Pattern LINE_PATTERN = Pattern.compile("^([0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3})\\s+\\[([^\\]]+)\\]\\s+(\\S+)\\s+\\[([^\\]]+)\\]: (.*)$");
 
     @Getter
     private String line;
