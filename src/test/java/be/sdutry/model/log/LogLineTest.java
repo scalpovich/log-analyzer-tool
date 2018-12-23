@@ -23,6 +23,7 @@ public class LogLineTest {
         assertThat(logLine.getLogLevel(), is(LogLevel.INFO));
         assertThat(logLine.getRenderingClass(), is("RenderingQueue"));
         assertThat(logLine.getMessage(), is("Rendering next image..."));
+        assertThat(logLine.isRegularLogLine(), is(true));
     }
 
     @Test
@@ -37,5 +38,6 @@ public class LogLineTest {
         assertThat(logLine.getLogLevel(), is(nullValue()));
         assertThat(logLine.getRenderingClass(), is(nullValue()));
         assertThat(logLine.getMessage(), is(stackTraceLine));
+        assertThat(logLine.isRegularLogLine(), is(false));
     }
 }

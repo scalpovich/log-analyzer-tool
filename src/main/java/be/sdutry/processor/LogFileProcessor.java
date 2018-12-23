@@ -1,0 +1,78 @@
+package be.sdutry.processor;
+
+import be.sdutry.model.log.LogLine;
+import be.sdutry.model.output.Rendering;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Stream;
+
+public class LogFileProcessor {
+    private static final Pattern START_RENDERING_PATTERN = Pattern.compile("^Executing request startRendering with arguments \\[([0-9]+), ([0-9]+)\\].*");
+    private static final Pattern START_RENDERING_RETURN_PATTERN = Pattern.compile("^Service startRendering returned (.*)$");
+    private File logFile;
+
+    public LogFileProcessor(final File logFile) {
+        this.logFile = logFile;
+    }
+
+    public List<Rendering> processRenderings() {
+        List<Rendering> renderings = new ArrayList<>();
+        Map<String, Rendering> threadRendering = new HashMap<>();
+
+        try (Stream<String> lines = Files.lines(logFile.toPath())) {
+            lines.forEachOrdered(s -> processRenderingLine(s, renderings, threadRendering));
+        } catch (IOException ex) {
+            //TODO Log exception and proper exception handling
+        }
+
+        return renderings;
+    }
+
+    private void processRenderingLine(final String fullLogLine, final List<Rendering> renderings, final Map<String, Rendering> threadRendering) {
+        LogLine logLine = new LogLine(fullLogLine);
+
+        if (logLine.isRegularLogLine()) {
+	    boolean processedLine = matchStartRendering(logLine, renderings, threadRendering) 
+                    || matchStartRenderingReturn(logLine, renderings, threadRendering);
+        }
+    }
+
+    private boolean matchStartRendering(final LogLine logLine, final List<Rendering> renderings, final Map<String, Rendering> threadRendering) {
+        Matcher matcher = START_RENDERING_PATTERN.matcher(logLine.getMessage());
+
+        if (matcher.matches()) {
+            Rendering rendering = new Rendering(Long.valueOf(matcher.group(1)), Long.valueOf(matcher.group(2)), logLine.getTimeStamp());
+            renderings.add(rendering);
+	    threadRendering.put(logLine.getThread(), rendering);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean matchStartRenderingReturn(final LogLine logLine, final List<Rendering> renderings, final Map<String, Rendering> threadRendering) {
+        Matcher matcher = START_RENDERING_RETURN_PATTERN.matcher(logLine.getMessage());
+
+        if (matcher.matches()) {
+            Rendering rendering = threadRendering.get(logLine.getThread());
+
+            if (rendering != null) {
+                rendering.setUid(matcher.group(1));
+                threadRendering.remove(logLine.getThread());
+            }
+
+            return true;
+	}
+
+	return false;
+    }
+}

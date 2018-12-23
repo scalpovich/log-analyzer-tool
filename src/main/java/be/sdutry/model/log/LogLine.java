@@ -39,4 +39,8 @@ public class LogLine {
             message = line;
         }
     }
+
+    public boolean isRegularLogLine() {
+        return timeStamp != null;
+    }
 }
