@@ -22,7 +22,7 @@ public class Rendering {
 
     public Rendering(final long documentId, final long page, final LocalDateTime timeStamp) {
         this.documentId = documentId;
-	this.page = page;
+        this.page = page;
 	startRenderingTimeStamps.add(timeStamp);
     }
 
