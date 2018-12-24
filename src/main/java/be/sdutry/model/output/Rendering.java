@@ -17,10 +17,16 @@ public class Rendering {
     private String uid;
     @Getter
     private List<LocalDateTime> startRenderingTimeStamps = new ArrayList<>();
+    @Getter
+    private List<LocalDateTime> getRenderingTimeStamps = new ArrayList<>();
 
     public Rendering(final long documentId, final long page, final LocalDateTime timeStamp) {
         this.documentId = documentId;
 	this.page = page;
 	startRenderingTimeStamps.add(timeStamp);
+    }
+
+    public void addGetRenderingTimeStamp(final LocalDateTime timeStamp) {
+        getRenderingTimeStamps.add(timeStamp);
     }
 }

@@ -38,5 +38,7 @@ public class LogFileProcessorTest {
         assertThat(rendering.getUid(), is("1286374522721-4906"));
         assertThat(rendering.getStartRenderingTimeStamps(), hasSize(1));
         assertThat(rendering.getStartRenderingTimeStamps().get(0), is(LocalDateTime.parse("2010-10-06 09:15:22,718", LogLine.LOG_TIMESTAMP_FORMATTER)));
+        assertThat(rendering.getGetRenderingTimeStamps(), hasSize(1));
+        assertThat(rendering.getGetRenderingTimeStamps().get(0), is(LocalDateTime.parse("2010-10-06 09:15:23,041", LogLine.LOG_TIMESTAMP_FORMATTER)));
     }
 }
