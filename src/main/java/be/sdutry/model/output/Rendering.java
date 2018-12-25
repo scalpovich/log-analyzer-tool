@@ -29,4 +29,9 @@ public class Rendering {
     public void addGetRenderingTimeStamp(final LocalDateTime timeStamp) {
         getRenderingTimeStamps.add(timeStamp);
     }
+
+    public void addStartRenderingTimeStamp(final LocalDateTime timeStamp) {
+        startRenderingTimeStamps.add(timeStamp);
+    }
+
 }

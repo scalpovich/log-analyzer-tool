@@ -72,7 +72,14 @@ public class LogFileProcessor {
             if (rendering != null) {
                 rendering.setUid(matcher.group(1));
                 threadRendering.remove(logLine.getThread());
-                uidRendering.put(rendering.getUid(), rendering);
+                Rendering existingRenderingWithUid = uidRendering.get(rendering.getUid());
+
+                if (existingRenderingWithUid == null) {
+                    uidRendering.put(rendering.getUid(), rendering);
+                } else {
+                    existingRenderingWithUid.addStartRenderingTimeStamp(rendering.getStartRenderingTimeStamps().get(0));
+                    renderings.remove(rendering);
+                }
             }
 
             return true;

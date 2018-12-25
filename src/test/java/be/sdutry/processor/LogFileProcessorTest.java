@@ -38,7 +38,7 @@ public class LogFileProcessorTest {
         assertThat(rendering.getPage(), is(0L));
         assertThat(rendering.getUid(), is("1286374522721-4906"));
         assertThat(rendering.getStartRenderingTimeStamps(), hasSize(1));
-        assertThat(rendering.getStartRenderingTimeStamps().get(0), is(LocalDateTime.parse("2010-10-06 09:15:22,718", LogLine.LOG_TIMESTAMP_FORMATTER)));
+        assertThat(rendering.getStartRenderingTimeStamps(), contains(LocalDateTime.parse("2010-10-06 09:15:22,718", LogLine.LOG_TIMESTAMP_FORMATTER)));
         assertThat(rendering.getGetRenderingTimeStamps(), hasSize(1));
         assertThat(rendering.getGetRenderingTimeStamps(), contains(LocalDateTime.parse("2010-10-06 09:15:23,041", LogLine.LOG_TIMESTAMP_FORMATTER)));
     }
@@ -57,7 +57,7 @@ public class LogFileProcessorTest {
         assertThat(rendering.getPage(), is(0L));
         assertThat(rendering.getUid(), is("1286374522721-4906"));
         assertThat(rendering.getStartRenderingTimeStamps(), hasSize(1));
-        assertThat(rendering.getStartRenderingTimeStamps().get(0), is(LocalDateTime.parse("2010-10-06 09:15:22,718", LogLine.LOG_TIMESTAMP_FORMATTER)));
+        assertThat(rendering.getStartRenderingTimeStamps(), contains(LocalDateTime.parse("2010-10-06 09:15:22,718", LogLine.LOG_TIMESTAMP_FORMATTER)));
         assertThat(rendering.getGetRenderingTimeStamps(), hasSize(0));
     }
 
@@ -75,8 +75,26 @@ public class LogFileProcessorTest {
         assertThat(rendering.getPage(), is(0L));
         assertThat(rendering.getUid(), is("1286374522721-4906"));
         assertThat(rendering.getStartRenderingTimeStamps(), hasSize(1));
-        assertThat(rendering.getStartRenderingTimeStamps().get(0), is(LocalDateTime.parse("2010-10-06 09:15:22,718", LogLine.LOG_TIMESTAMP_FORMATTER)));
+        assertThat(rendering.getStartRenderingTimeStamps(), contains(LocalDateTime.parse("2010-10-06 09:15:22,718", LogLine.LOG_TIMESTAMP_FORMATTER)));
         assertThat(rendering.getGetRenderingTimeStamps(), hasSize(3));
         assertThat(rendering.getGetRenderingTimeStamps(), contains(LocalDateTime.parse("2010-10-06 09:15:23,041", LogLine.LOG_TIMESTAMP_FORMATTER), LocalDateTime.parse("2010-10-06 09:16:24,042", LogLine.LOG_TIMESTAMP_FORMATTER), LocalDateTime.parse("2010-10-06 09:16:28,125", LogLine.LOG_TIMESTAMP_FORMATTER)));
+    }
+
+    @Test
+    public void testLogFileDoubleRenderingNoGet() {
+        File inputLogFile = new File(this.getClass().getResource("/doubleRenderingNoGet.log").getFile());
+        LogFileProcessor processor = new LogFileProcessor(inputLogFile);
+
+        List<Rendering> renderings = processor.processRenderings();
+
+        assertThat(renderings, hasSize(1));
+
+        Rendering rendering = renderings.get(0);
+        assertThat(rendering.getDocumentId(), is(115392L));
+        assertThat(rendering.getPage(), is(0L));
+        assertThat(rendering.getUid(), is("1286374522721-4906"));
+        assertThat(rendering.getStartRenderingTimeStamps(), hasSize(2));
+        assertThat(rendering.getStartRenderingTimeStamps(), contains(LocalDateTime.parse("2010-10-06 09:15:22,718", LogLine.LOG_TIMESTAMP_FORMATTER),LocalDateTime.parse("2010-10-06 09:15:23,258", LogLine.LOG_TIMESTAMP_FORMATTER)));
+        assertThat(rendering.getGetRenderingTimeStamps(), hasSize(0));
     }
 }

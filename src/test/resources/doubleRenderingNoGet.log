@@ -1,0 +1,4 @@
+2010-10-06 09:15:22,718 [WorkerThread-5] INFO  [ServiceProvider]: Executing request startRendering with arguments [115392, 0] blablabla
+2010-10-06 09:15:22,722 [WorkerThread-5] INFO  [ServiceProvider]: Service startRendering returned 1286374522721-4906
+2010-10-06 09:15:23,258 [WorkerThread-3] INFO  [ServiceProvider]: Executing request startRendering with arguments [115392, 0] blablabla
+2010-10-06 09:15:23,262 [WorkerThread-3] INFO  [ServiceProvider]: Service startRendering returned 1286374522721-4906
