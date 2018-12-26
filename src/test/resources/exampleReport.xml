@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<report>
+  <rendering>
+    <document>1</document>
+    <page>1</page>
+    <uid>C</uid>
+    <start>2010-10-06 09:02:13,636</start>
+  </rendering>
+  <rendering>
+    <document>1</document>
+    <page>1</page>
+    <uid>A</uid>
+    <start>2010-10-06 09:02:13,636</start>
+    <start>2010-10-06 09:02:14,747</start>
+    <start>2010-10-06 09:02:15,858</start>
+    <get>2010-10-06 09:05:11,201</get>
+  </rendering>
+  <rendering>
+    <document>1</document>
+    <page>1</page>
+    <uid>B</uid>
+    <start>2010-10-06 09:02:13,636</start>
+    <get>2010-10-06 09:05:11,201</get>
+  </rendering>
+  <summary>
+    <count>3</count>
+    <duplicates>2</duplicates>
+    <unnecessary>1</unnecessary>
+  </summary>
+</report>
