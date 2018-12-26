@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<report>
+  <rendering>
+    <document>20</document>
+    <page>0</page>
+    <uid>58979-8725</uid>
+    <start>2010-10-06 09:15:22,718</start>
+  </rendering>
+  <rendering>
+    <document>115392</document>
+    <page>0</page>
+    <uid>1286374522721-4906</uid>
+    <start>2010-10-06 09:15:23,718</start>
+    <get>2010-10-06 09:15:26,041</get>
+    <get>2010-10-06 09:16:28,042</get>
+    <get>2010-10-06 09:16:33,125</get>
+    <get>2010-10-06 09:16:35,125</get>
+  </rendering>
+  <rendering>
+    <document>42</document>
+    <page>0</page>
+    <uid>98765-8754</uid>
+    <start>2010-10-06 09:15:27,718</start>
+    <get>2010-10-06 09:16:32,125</get>
+  </rendering>
+  <summary>
+    <count>3</count>
+    <duplicates>0</duplicates>
+    <unnecessary>1</unnecessary>
+  </summary>
+</report>
