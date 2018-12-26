@@ -24,6 +24,6 @@ public class App {
         } catch (final Exception exc) {
             //TODO log and handle exception
             throw new RuntimeException("could not generate report for logfile", exc);
-	}
+        }
     }
 }
