@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LogLine.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">log-analyzer-tool</a> &gt; <a href="index.source.html" class="el_package">be.sdutry.model.log</a> &gt; <span class="el_source">LogLine.java</span></div><h1>LogLine.java</h1><pre class="source lang-java linenums">package be.sdutry.model.log;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import lombok.Getter;
+
+public class LogLine {
+<span class="fc" id="L11">    public static final DateTimeFormatter LOG_TIMESTAMP_FORMATTER = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm:ss,SSS&quot;);</span>
+
+<span class="fc" id="L13">    private static final Pattern LINE_PATTERN = Pattern.compile(&quot;^([0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3})\\s+\\[([^\\]]+)\\]\\s+(\\S+)\\s+\\[([^\\]]+)\\]: (.*)$&quot;);</span>
+
+<span class="fc" id="L15">    @Getter</span>
+    private String line;
+<span class="fc" id="L17">    @Getter</span>
+    private LocalDateTime timeStamp;
+<span class="fc" id="L19">    @Getter</span>
+    private String thread;
+<span class="fc" id="L21">    @Getter</span>
+    private LogLevel logLevel;
+<span class="fc" id="L23">    @Getter</span>
+    private String renderingClass;
+<span class="fc" id="L25">    @Getter</span>
+    private String message;
+
+<span class="fc" id="L28">    public LogLine(final String line) {</span>
+<span class="fc" id="L29">        this.line = line;</span>
+<span class="fc" id="L30">        Matcher lineMatcher = LINE_PATTERN.matcher(line);</span>
+
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        if (lineMatcher.matches()) {</span>
+<span class="fc" id="L33">            timeStamp = LocalDateTime.parse(lineMatcher.group(1), LOG_TIMESTAMP_FORMATTER);</span>
+<span class="fc" id="L34">            thread = lineMatcher.group(2);</span>
+<span class="fc" id="L35">            logLevel = LogLevel.valueOf(lineMatcher.group(3));</span>
+<span class="fc" id="L36">            renderingClass = lineMatcher.group(4);</span>
+<span class="fc" id="L37">            message = lineMatcher.group(5);</span>
+        } else {
+<span class="fc" id="L39">            message = line;</span>
+        }
+<span class="fc" id="L41">    }</span>
+
+    public boolean isRegularLogLine() {
+<span class="fc bfc" id="L44" title="All 2 branches covered.">        return timeStamp != null;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
